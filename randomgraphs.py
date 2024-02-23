@@ -55,10 +55,29 @@ def create_efficiency_test(n:int) -> graph.Graph:
     G.addEdge(3*i+1,3*i+3, 99)
     G.addEdge(3*i+2,3*i+3, 101)
   return G
-  
+
+def make_connected(G: graph.Graph) -> graph.Graph:
+  ## Make the graph connected by adding edges
+  n = G.n
+  avg_w = 0
+  std_w = 0
+  if G.w:
+    avg_w = sum(G.w.values())/len(G.w)
+    std_w = (sum([(G.w[(u,v)] - avg_w)**2 for (u,v) in G.w])/len(G.w))**0.5
+  for u in range(n):
+    if len(G.adj[u]) == 0:
+      v = random.randint(0,n-1)
+      if G.w:
+        w = random.gauss(avg_w, std_w)
+        G.addEdge(u,v,w)
+      else:
+        G.addEdge(u,v)
+      
+  return G
 
 if __name__ == "__main__":
-  G = create_efficiency_test(100)
-  G.writegraph("efficiency_test.txt")
+  G = BarabasiAlbert(100, 10, 5)
+  G = make_connected(G)
+  G.writegraph("example1.txt")
 
 

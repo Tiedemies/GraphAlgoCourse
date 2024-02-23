@@ -2,7 +2,7 @@
 ### It is meant as an example for use in the course Graph Algorithms.
 ### It uses an adjacency list representation.
 ## TESTED on python 3.9.12
-from icecream import ic
+# from icecream import ic
 
 class Graph:
   """ initialize a graph with n vertices and no edges """
@@ -51,7 +51,7 @@ class Graph:
               v.strip()             
               self.addEdge(u,int(v))
           except:
-            ic(v)
+            #ic(v)
             pass
     f.close()
 
