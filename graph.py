@@ -14,6 +14,15 @@ class Graph:
     self.adj = [[] for i in range(self.n)]
     self.w = {}
 
+  """ A method of checking if two graphs are the same """
+  def __eq__(self, other) -> bool:
+    if self.n != other.n:
+      return False
+    for u in range(self.n):
+      if self.adj[u] != other.adj[u]:
+        return False
+    return True
+
   """ add an edge from vertex u to vertex v """
   def addEdge(self, u: int, v: int, w = None) -> None:
     nn = self.n
@@ -67,7 +76,7 @@ class Graph:
           f.write(str(v)+";")
       f.write("\n")
 
-    ### Test code ###
+### Test code which inputs the graph manually, then outputs, then reads it.
 if __name__ == "__main__":
   G = Graph(5)
   G.addEdge(0,1)
@@ -75,6 +84,8 @@ if __name__ == "__main__":
   G.addEdge(1,3)
   G.addEdge(2,3,5)
   G.writegraph("testgraph.txt")
-
+  
   U = Graph()
   U.readgraph("testgraph.txt")
+
+  print(G == U)
