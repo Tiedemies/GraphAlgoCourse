@@ -134,7 +134,7 @@ if __name__ == "__main__":
 
     G, groups = four_team_communication(n,p,q,r,b)
 
-    G.writegraph(f"four_team_communication_{n}")
+    G.writegraph(f"four_team_communication_{n=}_{p=}_{q=}_{r=}_{b=}")
 
     groupIDs = set(groups.values())
 
