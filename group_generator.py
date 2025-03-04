@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
         exit(-1)
 
-    assert n > 0, f"Received a graph size of {n}, but graph sizes cannot be non-positive."
+    assert n > 0, f"Received a graph size of {n=}, but graph sizes cannot be non-positive."
 
     pStr = sys.argv[2]
 
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
         exit(-2)
 
-    assert 0 <= p <= 1, f"The given communication probability p was not between 0 and 1."
+    assert 0 <= p <= 1, f"The given communication probability {p=} was not between 0 and 1."
 
     qStr = sys.argv[3]
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
         exit(-3)
 
-    assert 0 <= q <= 1, f"The given communication probability q was not between 0 and 1."
+    assert 0 <= q <= 1, f"The given communication probability {q=} was not between 0 and 1."
 
     rStr = sys.argv[4]
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
         exit(-4)
 
-    assert n > 0, f"Received a graph size of {n}, but graph sizes cannot be non-positive."
+    assert r > 0, f"Received a communication round count of {r=} ≤ 0. Should be ≥ 1."
 
     bStr = sys.argv[5]
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
         exit(-5)
 
-    assert 0 <= b <= 1, f"The given balancing parameter b was not between 0 and 1."
+    assert 0 <= b <= 1, f"The given balancing parameter {b=} was not between 0 and 1."
 
     G, groups = four_team_communication(n,p,q,r,b)
 
