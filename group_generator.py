@@ -1,11 +1,12 @@
 ## Generates a random four team communication graph, given parameters n, p, q, r, b
-## n is the number of vertices in the graph, p is the intra grop communication probability and q is the 
+## n is the number of vertices in the graph, p is the intra group communication probability and q is the
 ## inter group communication probability. r is the number of rounds of communication.
 ## b is the balance parameter, with b = 0 meaning that the graph is balanced and b = 1 meaning that the group sizes are
 ## random.
 
 from graph import Graph
 from random import randint, random, shuffle
+import sys
 
 def four_team_communication(n: int, p: float = 0.2, q: float = 0.05, r: int = 1, b: float = 0) -> Graph:
     G = Graph(n)
@@ -50,6 +51,85 @@ def four_team_communication(n: int, p: float = 0.2, q: float = 0.05, r: int = 1,
     return G
 
 if __name__ == "__main__":
-    G = four_team_communication(100)
-    G.writegraph("four_team_communication_100")
-    
+
+    cmdArgN = len(sys.argv)
+
+    if cmdArgN != 6:
+
+        print("Usage:\n\n  python3 group_generator.py n:int p:float q:float r:float b:float\n")
+
+    assert cmdArgN == 6, f"The number of command line arguments must be 5. Received {cmdArgN - 1}"
+
+    nStr = sys.argv[1]
+
+    try:
+
+        n = int(nStr)
+
+    except ValueError:
+
+        print(f"Invalid command line argument 1 \"{nStr}\": cannot convert to number of vertices.")
+
+        exit(-1)
+
+    assert n > 0, f"Received a graph size of {n}, but graph sizes cannot be non-positive."
+
+    pStr = sys.argv[2]
+
+    try:
+
+        p = float(pStr)
+
+    except ValueError:
+
+        print(f"\nInvalid command line argument 2 \"{pStr}\": cannot convert to float.")
+
+        exit(-2)
+
+    assert 0 <= p <= 1, f"The given communication probability p was not between 0 and 1."
+
+    qStr = sys.argv[3]
+
+    try:
+
+        q = float(qStr)
+
+    except ValueError:
+
+        print(f"\nInvalid command line argument 3 \"{qStr}\": cannot convert to float.")
+
+        exit(-3)
+
+    assert 0 <= q <= 1, f"The given communication probability q was not between 0 and 1."
+
+    rStr = sys.argv[4]
+
+    try:
+
+        r = int(rStr)
+
+    except ValueError:
+
+        print(f"\nInvalid command line argument 4 \"{rStr}\": cannot convert to number of communication rounds.")
+
+        exit(-4)
+
+    assert n > 0, f"Received a graph size of {n}, but graph sizes cannot be non-positive."
+
+    bStr = sys.argv[5]
+
+    try:
+
+        b = float(bStr)
+
+    except ValueError:
+
+        print(f"Invalid command line argument 5 \"{bStr}\": cannot convert to float.")
+
+        exit(-5)
+
+    assert 0 <= b <= 1, f"The given balancing parameter b was not between 0 and 1."
+
+    G = four_team_communication(n,p,q,r,b)
+
+    G.writegraph(f"four_team_communication_{n}")
