@@ -37,6 +37,7 @@ def four_team_communication(n: int, p: float = 0.2, q: float = 0.05, r: int = 1,
             groups[u] = 2
         else:
             groups[u] = 3
+
     ## Now create the edges:
     for i in range(r):
         for u in range(n):
@@ -48,7 +49,8 @@ def four_team_communication(n: int, p: float = 0.2, q: float = 0.05, r: int = 1,
                     G.addEdge(u, v)
                 elif groups[u] != groups[v] and random() < q:
                     G.addEdge(u, v)
-    return G
+
+    return G, groups
 
 if __name__ == "__main__":
 
@@ -130,6 +132,22 @@ if __name__ == "__main__":
 
     assert 0 <= b <= 1, f"The given balancing parameter b was not between 0 and 1."
 
-    G = four_team_communication(n,p,q,r,b)
+    G, groups = four_team_communication(n,p,q,r,b)
 
     G.writegraph(f"four_team_communication_{n}")
+
+    groupIDs = set(groups.values())
+
+    groupLists = []
+
+    for id in groupIDs:
+
+        groupLists.append([])
+
+    for vertex, groupID in groups.items():
+
+        groupLists[groupID].append(vertex)
+
+    for id in groupIDs:
+
+        print(f"{id} ↦ {groupLists[id]}")
